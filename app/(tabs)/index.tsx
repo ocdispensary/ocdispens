@@ -1,4 +1,3 @@
-import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -20,6 +19,14 @@ import Swiper from 'react-native-swiper';
  *  straight into an Expo Router project (app/(tabs)/index.tsx) and see data
  *  immediately without bundling extra JSON.
  * -------------------------------------------------------------------------- */
+
+// -----------------------------------------------------------------------------
+// Web polyfill: react‑native‑swiper relies on global.setImmediate which doesn’t
+// exist in browsers. Provide a minimal shim so it works on Expo Web.
+// -----------------------------------------------------------------------------
+setTimeout(() => console.log('there'));
+console.log('hello');
+
 
 const REMOTE_BASE = 'https://ocdispensary.github.io/oc-dispensary';
 const CATEGORIES_URL = `${REMOTE_BASE}/categories.json`;
@@ -118,7 +125,6 @@ export default function HomeScreen() {
         {/* ---------------- Welcome banner ------------- */}
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Welcome!</ThemedText>
-          <HelloWave />
         </ThemedView>
 
         {/* --------------- Categories grid ------------- */}
